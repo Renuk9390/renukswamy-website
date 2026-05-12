@@ -1,69 +1,55 @@
-export default function About() {
+import Image from "next/image"
+
+export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16">
+    <section className="max-w-5xl mx-auto px-6 py-20">
 
-      <h1 className="text-3xl font-bold mb-6">About Me</h1>
+      <div className="grid md:grid-cols-2 gap-10 items-center">
 
-      <p className="text-gray-700 leading-7 mb-6">
-        I am <b>Renukswamy Chikkamath</b>, a researcher working at the intersection of
-        Artificial Intelligence, Patent Information Retrieval, and Natural Language Processing.
-        My work focuses on building intelligent systems for prior art search, evaluation of
-        large language models, and multilingual retrieval systems.
-      </p>
+        {/* LEFT SIDE - TEXT */}
+        <div>
 
-      <p className="text-gray-700 leading-7 mb-6">
-        I am currently pursuing doctoral research at <b>Hochschule München (University of Applied Sciences, Munich)</b>,
-        where my focus is on AI-driven patent analytics and benchmark evaluation in information retrieval systems.
-        My academic journey includes experience in both research and industry, spanning applied AI systems,
-        software development, and information retrieval technologies.
-      </p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Renukswamy Chikkamath
+          </h1>
 
-      <p className="text-gray-700 leading-7 mb-6">
-        My research interest lies in understanding how large language models can be effectively evaluated
-        and applied in real-world retrieval tasks such as patent search. I am particularly interested in
-        bridging the gap between academic research and industrial applications of AI systems.
-      </p>
+          <p className="text-xl text-gray-600 mb-6">
+            AI for Patent Analytics • Information Retrieval • NLP • LLM Evaluation
+          </p>
 
-      <p className="text-gray-700 leading-7 mb-8">
-        I have also been actively involved in teaching and mentoring students in areas such as
-        Machine Learning, Natural Language Processing, and Information Retrieval, and I strongly believe
-        in building practical, industry-relevant AI education.
-      </p>
+          <p className="text-gray-700 text-lg leading-7 mb-8">
+            Researcher working at the intersection of AI, Patent Information Retrieval,
+            and Multilingual NLP. Focused on prior art search, retrieval systems,
+            and evaluation of large language models.
+          </p>
 
-      {/* HIGHLIGHTS SECTION */}
-      <div className="grid md:grid-cols-2 gap-6">
+          <div className="flex gap-3 flex-wrap">
+            <a href="/collaborate" className="px-5 py-2 bg-black text-white rounded-xl">
+              Collaborate
+            </a>
 
-        <div className="p-5 border rounded-xl">
-          <h2 className="font-semibold mb-2">Research Focus</h2>
-          <ul className="text-sm text-gray-600 space-y-1">
-            <li>AI for Patent Analytics</li>
-            <li>Information Retrieval Systems</li>
-            <li>LLM Evaluation & Benchmarking</li>
-            <li>Multilingual NLP</li>
-          </ul>
+            <a href="/about" className="px-5 py-2 border rounded-xl">
+              About Me
+            </a>
+          </div>
+
         </div>
 
-        <div className="p-5 border rounded-xl">
-          <h2 className="font-semibold mb-2">Academic Identity</h2>
-          <ul className="text-sm text-gray-600 space-y-1">
-            <li>Germany-based PhD Researcher</li>
-            <li>Applied AI & NLP Systems</li>
-            <li>Industry-Academia Collaboration</li>
-            <li>Patent & Legal Tech AI Systems</li>
-          </ul>
+        {/* RIGHT SIDE - IMAGE */}
+        <div className="flex justify-center">
+
+          <Image
+            src="/profile.jpg"
+            alt="Renukswamy Chikkamath"
+            width={320}
+            height={320}
+            className="rounded-2xl shadow-lg object-cover"
+          />
+
         </div>
 
       </div>
 
-      {/* FINAL STATEMENT */}
-      <div className="mt-10 p-6 border rounded-xl bg-gray-50">
-        <p className="text-gray-700">
-          My long-term goal is to build AI systems that improve access to technical knowledge,
-          especially in patent and intellectual property domains, while fostering strong
-          research collaborations between Europe and India.
-        </p>
-      </div>
-
-    </div>
+    </section>
   )
 }
