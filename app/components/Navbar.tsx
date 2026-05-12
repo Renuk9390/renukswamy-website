@@ -4,9 +4,7 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center px-6 py-4 border-b">
 
-      <div className="font-bold text-lg">
-        Renukswamy
-      </div>
+
 
       <div className="flex gap-5 text-sm">
         <Link href="/">Home</Link>
