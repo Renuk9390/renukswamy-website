@@ -1,46 +1,65 @@
-import { clear } from "console";
-
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-gray-900 px-8 py-16">
-      <section className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold mb-6">
-          Renukswamy Chikkamath
-        </h1>
+    <section className="max-w-5xl mx-auto px-6 py-20">
 
-        <p className="text-xl text-gray-600 mb-8">
-          AI for Patent Analytics • Information Retrieval • NLP • LLM Evaluation
-        </p>
+      {/* HERO */}
+      <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        Renukswamy Chikkamath
+      </h1>
 
-        <p className="text-lg leading-8 text-gray-700 mb-6">
-          Researcher working at the intersection of Artificial Intelligence,
-          Patent Information Retrieval, Multilingual NLP, and Benchmark Evaluation.
-          Currently pursuing PhD research at Hochschule München (Munich University
-          of Applied Sciences), Germany.
-        </p>
+      <p className="text-xl text-gray-600 mb-6">
+        AI for Patent Analytics • Information Retrieval • NLP • LLM Evaluation
+      </p>
 
-        <p className="text-lg leading-8 text-gray-700 mb-10">
-          Interested in Indo-German research collaborations, applied AI systems,
-          retrieval-augmented generation (RAG), prior art search, and industry-academia
-          innovation in AI.
-        </p>
+      <p className="text-gray-700 text-lg leading-7 mb-10">
+        Researcher working at the intersection of Artificial Intelligence,
+        Patent Information Retrieval, and Multilingual NLP.
+        Focused on building intelligent systems for prior art search and
+        evaluation of large language models in real-world retrieval settings.
+      </p>
 
-        <div className="flex gap-4">
-          <a
-            href="https://scholar.google.com"
-            className="px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800"
-          >
-            Google Scholar
-          </a>
+      {/* BUTTONS */}
+      <div className="flex flex-wrap gap-3 mb-16">
+        <a className="px-5 py-2 bg-black text-white rounded-xl"
+           href="/collaborate">
+          Collaborate
+        </a>
 
-          <a
-            href="https://github.com/Renuk9390"
-            className="px-6 py-3 border border-black rounded-xl hover:bg-gray-100"
-          >
-            GitHub
-          </a>
+        <a className="px-5 py-2 border rounded-xl"
+           href="https://github.com/Renuk9390">
+          GitHub
+        </a>
+
+        <a className="px-5 py-2 border rounded-xl"
+           href="https://www.linkedin.com">
+          LinkedIn
+        </a>
+      </div>
+
+      {/* POSITIONING BLOCK */}
+      <div className="grid md:grid-cols-2 gap-6">
+
+        <div className="p-6 border rounded-xl">
+          <h2 className="font-semibold mb-2">Research Focus</h2>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• AI for Patents / IP</li>
+            <li>• Information Retrieval Systems</li>
+            <li>• LLM Evaluation & Benchmarking</li>
+            <li>• Multilingual NLP</li>
+          </ul>
         </div>
-      </section>
-    </main>
-  );
+
+        <div className="p-6 border rounded-xl">
+          <h2 className="font-semibold mb-2">Vision</h2>
+          <p className="text-sm text-gray-600">
+            Bridging AI research between Germany and India,
+            with focus on real-world patent search systems,
+            evaluation frameworks, and applied NLP solutions.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+  )
 }
