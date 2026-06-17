@@ -1,11 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
+import AwardsMarquee from "./components/AwardsMarquee"
 import { ArrowRightIcon, DownloadIcon } from "./components/Icons"
 
 const stats = [
   { value: "12", label: "Peer-reviewed publications" },
   { value: "7+", label: "Years researching AI & NLP" },
-  { value: "2", label: "Countries — Germany & India" },
+  { value: "8", label: "Countries- Research Footprint" },
   { value: "2026", label: "Expected PhD completion" },
 ]
 
@@ -50,7 +51,12 @@ const pillars = [
 
 const publications = [
   {
-    venue: "World Patent Information · Elsevier, 2025",
+    venue: "SSRN · 2026",
+    title:
+      "Evaluating Prior Art Search With Large Language Models: Linguistic Complexity And Benchmark Challenges",
+  },
+  {
+    venue: "World Patent Information · Elsevier, 2026",
     title:
       "Rethinking Patent Retrieval with Language Models: Toward Scalable and Efficient Search",
   },
@@ -130,21 +136,17 @@ export default function Home() {
             </dl>
           </div>
 
-          {/* Photo + signature "retrieval results" card */}
+          {/* Photo */}
           <div className="mx-auto w-full max-w-sm">
-            <div className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-mist">
-                <Image
-                  src="/profile.jpg"
-                  alt="Portrait of Renukswamy Chikkamath"
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 24rem, 80vw"
-                  className="object-cover"
-                />
-              </div>
-
-              
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-mist">
+              <Image
+                src="/profile.jpg"
+                alt="Portrait of Renukswamy Chikkamath"
+                fill
+                priority
+                sizes="(min-width: 768px) 24rem, 80vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -188,8 +190,10 @@ export default function Home() {
         </div>
       </section>
 
+      <AwardsMarquee />
+
       {/* Featured publications */}
-      <section className="border-y border-line bg-mist/40">
+      <section>
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
