@@ -16,7 +16,7 @@ const achievements: Achievement[] = [
   {
     image: "EPO-Codefest-2024.png",
     alt: "Finalist certificate from the European Patent Office's CodeFest 2024",
-    eyebrow: "2024 \u00b7 EPO CodeFest",
+    eyebrow: "2024 \u00b7 EPO CodeFest, Germany",
     title: "Finalist, EPO CodeFest 2024",
     caption:
       "Received a finalist certificate from the European Patent Office at CodeFest 2024, presented at the Patent Knowledge Forum.",
@@ -24,7 +24,7 @@ const achievements: Achievement[] = [
   {
     image: "manipa-best-paper.png",
     alt: "Best paper award at the HINT'24 conference, MIT Manipal",
-    eyebrow: "2024 \u00b7 HINT'24, MIT Manipal",
+    eyebrow: "2024 \u00b7 HINT'24, MIT Manipal, India",
     title: "Best Paper Award",
     caption:
       "Awarded Best Paper at the HINT'24 conference, held at MIT, Manipal, India, for research on patent information retrieval.",
@@ -40,7 +40,7 @@ const achievements: Achievement[] = [
   {
     image: "sigir2023.png",
     alt: "Presenting a workshop paper at PatentSemTech 2023, SIGIR, Taipei",
-    eyebrow: "2023 \u00b7 SIGIR, Taipei",
+    eyebrow: "2023 \u00b7 SIGIR, Taipei, Taiwan",
     title: "Workshop Paper, PatentSemTech 2023",
     caption:
       "Presented a workshop paper at PatentSemTech 2023, part of SIGIR 2023 in Taipei, Taiwan \u2014 a rare and rewarding crowd to be part of.",
@@ -48,7 +48,7 @@ const achievements: Achievement[] = [
   {
     image: "best-presentation-mlnlp.png",
     alt: "Best presenter award at MLNLP 2022",
-    eyebrow: "2022 \u00b7 MLNLP",
+    eyebrow: "2022 \u00b7 MLNLP, China",
     title: "Best Presenter Award",
     caption:
       "Recognized for the best presentation at MLNLP 2022, for research on domain-specific pre-trained language models for patent classification, published by ACM.",
