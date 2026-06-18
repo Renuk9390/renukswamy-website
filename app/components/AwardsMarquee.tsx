@@ -1,4 +1,8 @@
+"use client"
+
 import Image from "next/image"
+import { useEffect, useRef, type KeyboardEvent, type PointerEvent } from "react"
+import { ArrowLeftIcon, ArrowRightIcon } from "./Icons"
 
 type Achievement = {
   image: string
@@ -83,10 +87,111 @@ const achievements: Achievement[] = [
   },
 ]
 
-// Duplicate the list so the marquee loops seamlessly at -50% translation.
+// Duplicated so the auto-scroll can loop seamlessly; the second
+// half is hidden from assistive tech so nothing is announced twice.
 const track = [...achievements, ...achievements]
 
+const AUTO_SCROLL_PX_PER_SECOND = 42
+const RESUME_DELAY_MS = 1200
+
 export default function AwardsMarquee() {
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const pausedRef = useRef(false)
+  const draggingRef = useRef(false)
+  const dragStartXRef = useRef(0)
+  const dragStartScrollRef = useRef(0)
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Auto-scroll loop (frame-rate independent, pauses on any interaction).
+  useEffect(() => {
+    const el = scrollerRef.current
+    if (!el) return
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+    if (prefersReducedMotion) return
+
+    let frameId: number
+    let lastTimestamp: number | null = null
+
+    const step = (timestamp: number) => {
+      if (lastTimestamp === null) lastTimestamp = timestamp
+      const deltaSeconds = (timestamp - lastTimestamp) / 1000
+      lastTimestamp = timestamp
+
+      if (!pausedRef.current && !draggingRef.current) {
+        el.scrollLeft += AUTO_SCROLL_PX_PER_SECOND * deltaSeconds
+
+        const halfWidth = el.scrollWidth / 2
+        if (el.scrollLeft >= halfWidth) {
+          el.scrollLeft -= halfWidth
+        }
+      }
+
+      frameId = requestAnimationFrame(step)
+    }
+
+    frameId = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frameId)
+  }, [])
+
+  const pause = () => {
+    pausedRef.current = true
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+  }
+
+  const scheduleResume = () => {
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      pausedRef.current = false
+    }, RESUME_DELAY_MS)
+  }
+
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    // Only hijack plain mouse drags; let touch/pen use native scrolling.
+    if (e.pointerType !== "mouse") return
+    const el = scrollerRef.current
+    if (!el) return
+    draggingRef.current = true
+    pause()
+    dragStartXRef.current = e.clientX
+    dragStartScrollRef.current = el.scrollLeft
+    el.setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return
+    const el = scrollerRef.current
+    if (!el) return
+    const delta = e.clientX - dragStartXRef.current
+    el.scrollLeft = dragStartScrollRef.current - delta
+  }
+
+  const endDrag = () => {
+    if (!draggingRef.current) return
+    draggingRef.current = false
+    scheduleResume()
+  }
+
+  const scrollByPage = (direction: 1 | -1) => {
+    const el = scrollerRef.current
+    if (!el) return
+    pause()
+    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" })
+    scheduleResume()
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault()
+      scrollByPage(1)
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault()
+      scrollByPage(-1)
+    }
+  }
+
   return (
     <section className="border-y border-line bg-mist py-16">
       <div className="mx-auto max-w-6xl px-6">
@@ -98,19 +203,37 @@ export default function AwardsMarquee() {
         </h2>
       </div>
 
-      <div className="marquee mt-10">
-        <div className="marquee-track flex gap-6 px-6">
+      <div className="relative mt-10">
+        <div
+          ref={scrollerRef}
+          role="region"
+          aria-label="Achievements and milestones. Use the left and right arrow keys, drag, or the buttons to browse."
+          tabIndex={0}
+          onMouseEnter={pause}
+          onMouseLeave={() => {
+            if (!draggingRef.current) scheduleResume()
+          }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onFocus={pause}
+          onBlur={scheduleResume}
+          onKeyDown={handleKeyDown}
+          className="flex cursor-grab gap-6 overflow-x-auto px-6 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        >
           {track.map((item, i) => (
             <figure
               key={`${item.image}-${i}`}
               aria-hidden={i >= achievements.length ? "true" : undefined}
-              className="w-72 shrink-0 overflow-hidden rounded-2xl border border-line bg-paper sm:w-80"
+              className="w-72 shrink-0 select-none overflow-hidden rounded-2xl border border-line bg-paper sm:w-80"
             >
               <div className="relative h-44 bg-paper">
                 <Image
                   src={`/awards/${item.image}`}
                   alt={item.alt}
                   fill
+                  draggable={false}
                   sizes="320px"
                   className="object-contain p-3"
                 />
@@ -129,6 +252,28 @@ export default function AwardsMarquee() {
             </figure>
           ))}
         </div>
+
+        {/* Edge fades */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-mist to-transparent sm:w-16" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-mist to-transparent sm:w-16" />
+
+        {/* Manual controls */}
+        <button
+          type="button"
+          aria-label="Show previous achievements"
+          onClick={() => scrollByPage(-1)}
+          className="absolute left-1 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-paper/90 text-ink shadow-sm backdrop-blur-sm transition-colors hover:border-accent hover:text-accent sm:left-2"
+        >
+          <ArrowLeftIcon className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Show next achievements"
+          onClick={() => scrollByPage(1)}
+          className="absolute right-1 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-paper/90 text-ink shadow-sm backdrop-blur-sm transition-colors hover:border-accent hover:text-accent sm:right-2"
+        >
+          <ArrowRightIcon className="h-5 w-5" />
+        </button>
       </div>
     </section>
   )

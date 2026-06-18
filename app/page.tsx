@@ -6,7 +6,7 @@ import { ArrowRightIcon, DownloadIcon } from "./components/Icons"
 const stats = [
   { value: "12", label: "Peer-reviewed publications" },
   { value: "7+", label: "Years researching AI & NLP" },
-  { value: "8", label: "Countries- Research Footprint" },
+  { value: "2", label: "Countries — Germany & India" },
   { value: "2026", label: "Expected PhD completion" },
 ]
 
@@ -51,12 +51,7 @@ const pillars = [
 
 const publications = [
   {
-    venue: "SSRN · 2026",
-    title:
-      "Evaluating Prior Art Search With Large Language Models: Linguistic Complexity And Benchmark Challenges",
-  },
-  {
-    venue: "World Patent Information · Elsevier, 2026",
+    venue: "World Patent Information · Elsevier, 2025",
     title:
       "Rethinking Patent Retrieval with Language Models: Toward Scalable and Efficient Search",
   },
