@@ -10,18 +10,26 @@ type Publication = {
 const publications: Publication[] = [
   {
     title:
-      "Patent Retrieval with Few-Shot Fine-Tuning and Quantized Embeddings",
+      "Evaluating Prior Art Search With Large Language Models: Linguistic Complexity And Benchmark Challenges",
     authors: "Renukswamy Chikkamath, Linda Andersson, Markus Endres",
-    venue: "ICAAI, ACM, Manchester, UK",
-    year: "2025",
+    venue: "SSRN, Preprint",
+    year: "2026",
   },
   {
     title:
       "Rethinking Patent Retrieval with Language Models: Toward Scalable and Efficient Search",
     authors: "Renukswamy Chikkamath, Linda Andersson, Markus Endres",
     venue: "World Patent Information, Elsevier",
+    year: "2026",
+  },
+  {
+    title:
+      "Patent Retrieval with Few-Shot Fine-Tuning and Quantized Embeddings",
+    authors: "Renukswamy Chikkamath, Linda Andersson, Markus Endres",
+    venue: "ICAAI, ACM, Manchester, UK",
     year: "2025",
   },
+
   {
     title: "Enhancing Patent Retrieval Using Automated Patent Summarization",
     authors:
