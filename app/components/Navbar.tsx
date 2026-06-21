@@ -9,6 +9,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/research", label: "Research" },
+  { href: "/demo", label: "Demo" },
   { href: "/teaching", label: "Teaching" },
   { href: "/publications", label: "Publications" },
   { href: "/consulting", label: "Consulting" },
@@ -36,7 +37,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-5 xl:flex">
           {links.map((link) => {
             const active =
               link.href === "/"
@@ -59,7 +60,7 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <a
             href="mailto:renukswamy.chikkamath@hm.edu"
             className="whitespace-nowrap rounded-full bg-ink px-5 py-2 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-ink"
@@ -74,7 +75,7 @@ export default function Navbar() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-ink lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-ink xl:hidden"
         >
           {open ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
         </button>
@@ -82,7 +83,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-line bg-paper px-6 py-4 lg:hidden">
+        <div className="border-t border-line bg-paper px-6 py-4 xl:hidden">
           <div className="flex flex-col gap-4">
             {links.map((link) => {
               const active =
