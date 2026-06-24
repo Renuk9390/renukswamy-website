@@ -1,9 +1,13 @@
 import { ArrowUpRightIcon } from "../components/Icons"
 
-// TODO: replace with your actual HuggingFace Space URL once deployed,
-// e.g. "https://huggingface.co/spaces/your-username/patent-prior-art-explorer"
+// HuggingFace Spaces gives every Space two URLs: a page on
+// huggingface.co for browsing, and a direct *.hf.space subdomain
+// (owner + space name, lowercased, hyphen-joined) used for embedding.
+// ?__theme=light forces Gradio's light theme so its background is white
+// rather than dark -- without this, dark grey Gradio chrome shows as
+// black side-bars on mobile where the iframe doesn't fill 100% width.
 const SPACE_EMBED_URL =
-  "https://renukswamy-explainable-patent-prior-art-search.hf.space"
+  "https://renukswamy-explainable-patent-prior-art-search.hf.space?__theme=light"
 const SPACE_PAGE_URL =
   "https://huggingface.co/spaces/Renukswamy/Explainable-Patent-Prior-Art-Search"
 
@@ -56,19 +60,20 @@ export default function Demo() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="overflow-hidden rounded-2xl border border-line bg-mist">
+      <section className="mx-auto max-w-6xl px-6 py-10 md:py-16">
+        <div className="overflow-hidden rounded-2xl border border-line bg-paper shadow-sm">
           <iframe
             src={SPACE_EMBED_URL}
             title="Patent Prior-Art Explorer demo"
-            className="h-[820px] w-full"
+            className="h-[900px] w-full bg-white md:h-[820px]"
             loading="lazy"
+            allow="clipboard-write"
           />
         </div>
         <p className="mt-4 text-center text-xs text-slate-light">
-          Hosted as a free HuggingFace Space. If the embed above doesn&apos;t
-          load (some browser privacy settings block embedded third-party
-          pages), use the &quot;Open in a new tab&quot; link.
+          Hosted as a free HuggingFace Space &mdash; may take a few seconds
+          to wake up on first load. If the embed doesn&apos;t load, use the
+          &quot;Open in a new tab&quot; link above.
         </p>
       </section>
 
